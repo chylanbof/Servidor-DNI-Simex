@@ -6,6 +6,6 @@ COPY build/libs/servidor-dni-1.0.jar servidor-dni.jar
 
 RUN mkdir -p dni_files
 
-EXPOSE 9000
+EXPOSE 9000 
 
 ENTRYPOINT ["java", "-jar", "servidor-dni.jar"]
