@@ -25,9 +25,8 @@ class ClientHandler(private val socket: Socket) : Runnable {
                 }
             }
 
-            // Esperar a que el cliente reciba todos los datos antes de cerrar
             socket.getOutputStream().flush()
-            Thread.sleep(200)  // ← dar tiempo al OS para vaciar el buffer TCP
+            Thread.sleep(200)
 
         } catch (e: Exception) {
             println("Error con cliente: ${e.message}")

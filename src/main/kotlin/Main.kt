@@ -5,7 +5,7 @@ fun main() {
     val servidor = ServerSocket(puerto)
     println("Servidor DNI escuchando en puerto $puerto...")
 
-    // Bucle infinito: acepta clientes y lanza un thread por cada uno
+    // Esto es un bucle infinito que acepta clientes y lanza un thread por cada uno
     while (true) {
         val clienteSocket = servidor.accept()
         val hilo = Thread(ClientHandler(clienteSocket))

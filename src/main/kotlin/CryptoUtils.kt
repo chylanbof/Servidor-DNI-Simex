@@ -8,29 +8,6 @@ import java.util.Base64
 
 object CryptoUtils {
 
-    fun generarClave(): SecretKey {
-        val keyGen = KeyGenerator.getInstance("AES")
-        keyGen.init(256)
-        return keyGen.generateKey()
-    }
-
-    fun claveABase64(clave: SecretKey): String =
-        Base64.getEncoder().encodeToString(clave.encoded)
-
-    fun base64AClave(base64: String): SecretKey {
-        val bytes = Base64.getDecoder().decode(base64)
-        return SecretKeySpec(bytes, "AES")
-    }
-
-    // Devuelve IV (16 bytes) + datos encriptados concatenados
-    fun encriptar(datos: ByteArray, clave: SecretKey): ByteArray {
-        val iv = ByteArray(16).also { SecureRandom().nextBytes(it) }
-        val cipher = Cipher.getInstance("AES/CBC/PKCS5Padding")
-        cipher.init(Cipher.ENCRYPT_MODE, clave, IvParameterSpec(iv))
-        val encriptado = cipher.doFinal(datos)
-        return iv + encriptado  // guardamos IV al inicio
-    }
-
     // Extrae IV de los primeros 16 bytes, luego desencripta
     fun desencriptar(datos: ByteArray, clave: SecretKey): ByteArray {
         val iv = datos.copyOfRange(0, 16)
